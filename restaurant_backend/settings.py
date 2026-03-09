@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-r0i)3$b&_pun5h$obu8k_xw7a8ve#osvq5qby=ry-rx&w%270q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -77,14 +77,16 @@ WSGI_APPLICATION = 'restaurant_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+import os
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'rest_db',
-        'USER': 'root',
-        'PASSWORD':'nani123',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': os.environ.get('railway'),
+        'USER': os.environ.get('root'),
+        'PASSWORD': os.environ.get('YoJUmmqwNLFWcRSjyqrBfaNccpztdkhg'),
+        'HOST': os.environ.get('mysql.railway.internal'),
+        'PORT': os.environ.get('3306'),
     }
 }
 
