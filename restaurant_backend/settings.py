@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-r0i)3$b&_pun5h$obu8k_xw7a8ve#osvq5qby=ry-rx&w%270q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -79,16 +79,26 @@ WSGI_APPLICATION = 'restaurant_backend.wsgi.application'
 
 import os
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('railway'),
-        'USER': os.environ.get('root'),
-        'PASSWORD': os.environ.get('YoJUmmqwNLFWcRSjyqrBfaNccpztdkhg'),
-        'HOST': os.environ.get('mysql.railway.internal'),
-        'PORT': os.environ.get('3306'),
+import os
+
+if os.environ.get("MYSQLHOST"):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ.get('MYSQLDATABASE'),
+            'USER': os.environ.get('MYSQLUSER'),
+            'PASSWORD': os.environ.get('MYSQLPASSWORD'),
+            'HOST': os.environ.get('MYSQLHOST'),
+            'PORT': os.environ.get('MYSQLPORT'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
