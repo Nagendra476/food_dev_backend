@@ -34,10 +34,17 @@ from rest_framework import serializers
 from .models import Category,Order,OrderItem,Address
 
 class CategorySerializer(serializers.ModelSerializer):
+    img = serializers.SerializerMethodField()
+
     class Meta:
         model = Category
-        fields = '__all__'
-        read_only_fields = ['user']
+        fields = ['id','name','price','img']
+
+    def get_img(self, obj):
+        request = self.context.get('request')
+        if obj.img:
+            return request.build_absolute_uri(obj.img.url)
+        return None
 
 
 class Cartserializer(serializers.ModelSerializer):

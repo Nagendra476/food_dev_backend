@@ -206,6 +206,11 @@ class CategoryListCreate(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update({"request": self.request})
+        return context
+
 class ProductList(generics.ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
