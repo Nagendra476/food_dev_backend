@@ -98,7 +98,7 @@ if os.environ.get("MYSQLHOST"):
 else:
     DATABASES = {
         'default': dj_database_url.config(
-        default=os.environ.get("postgresql://rest_db_cdyg_user:a8lRp0NmyXGAGHys7gjbv3DtDE5j7ZJY@dpg-d77p1qbuibrs73c4c2ng-a.oregon-postgres.render.com/rest_db_cdyg"),
+        default=os.environ.get("DATABASE_URL"),
         conn_max_age=600,
     )
     
